@@ -20,7 +20,8 @@ const PRESETS = [
     title: 'Hãy trao cho anh',
     artist: 'Sơn Tùng M-TP',
     keyword: 'miên man',
-    audioUrl: encodeURI('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'), // Placeholder audio
+    audioUrl: encodeURI('Haytraochoanh (10-11) - Key[Miên man].wav
+'), // Placeholder audio
     targetStart: 10.0,
     targetEnd: 11.0,
     chorusStartTime: 0,
@@ -31,7 +32,8 @@ const PRESETS = [
     title: '50 năm về sau',
     artist: 'Đặng Thanh Tuyền',
     keyword: 'Hoàng hôn',
-    audioUrl: encodeURI('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'), // Placeholder audio
+    audioUrl: encodeURI('50namvesau (10-11) - Key[Hoàng hôn].wav
+'), // Placeholder audio
     targetStart: 10.0,
     targetEnd: 11,
     chorusStartTime: 0,
