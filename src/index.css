@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Orbitron:wght@700&display=swap');
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-digital: "Orbitron", sans-serif;
+}
+
+@layer components {
+  .timeline-container {
+    @apply relative w-full h-[60px] flex items-center;
+  }
+
+  .timeline-main-line {
+    @apply absolute w-full h-[6px] bg-slate-200 rounded-full;
+  }
+
+  .target-zone {
+    @apply absolute h-[16px] bg-red-500 border-2 border-red-600 z-10 rounded-sm transition-opacity duration-300;
+  }
+
+  .target-label {
+    @apply absolute -bottom-7 left-1/2 -translate-x-1/2 text-[11px] text-red-600 font-black uppercase whitespace-nowrap;
+  }
+
+  .seeker {
+    @apply absolute w-[6px] h-[34px] bg-slate-800 z-20 rounded-full shadow-md;
+  }
+
+  .pulse-red {
+    animation: pulse-red 1.5s infinite;
+  }
+
+  @keyframes pulse-red {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  .success-bg {
+    animation: bg-green 0.6s ease-out forwards;
+  }
+
+  @keyframes bg-green {
+    0% { background-color: #fff; }
+    100% { background-color: #f0fdf4; }
+  }
+
+  .fail-bg {
+    animation: bg-red 0.6s ease-out forwards;
+  }
+
+  @keyframes bg-red {
+    0% { background-color: #fff; }
+    100% { background-color: #fef2f2; }
+  }
+}
