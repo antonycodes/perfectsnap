@@ -20,7 +20,7 @@ const PRESETS = [
     title: 'Hãy trao cho anh',
     artist: 'Sơn Tùng M-TP',
     keyword: 'miên man',
-    audioUrl: encodeURI('Haytraochoanh (10-11) - Key[Miên man].wav'), // Placeholder audio
+    audioUrl: encodeURI('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'), // Placeholder audio
     targetStart: 10.0,
     targetEnd: 11.0,
     chorusStartTime: 0,
@@ -31,7 +31,7 @@ const PRESETS = [
     title: '50 năm về sau',
     artist: 'Đặng Thanh Tuyền',
     keyword: 'Hoàng hôn',
-    audioUrl: encodeURI('50namvesau (10-11) - Key[Hoàng hôn].wav'), // Placeholder audio
+    audioUrl: encodeURI('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'), // Placeholder audio
     targetStart: 10.0,
     targetEnd: 11,
     chorusStartTime: 0,
@@ -84,15 +84,15 @@ export default function App() {
   };
 
   const stopGame = useCallback((timeAtStop?: number) => {
-    if (audioRef.current) {
+    if (audioRef.current && gameState === 'playing') {
       const absoluteStop = timeAtStop ?? audioRef.current.currentTime;
       const relativeStop = absoluteStop - (songInfo?.chorusStartTime || 0);
       audioRef.current.pause();
       setFinalTime(relativeStop);
       setRelativeTime(relativeStop);
+      setGameState('result');
     }
-    setGameState('result');
-  }, [songInfo]);
+  }, [songInfo, gameState]);
 
   const updateUI = useCallback(() => {
     if (audioRef.current && gameState === 'playing') {
@@ -118,7 +118,7 @@ export default function App() {
 
   const startGame = () => {
     if (!audioSrc || !songInfo) {
-      showToast("Vui lòng chọn bài hát!");
+      showToast("Vui lòng chọn bộ đề trước!");
       return;
     }
 
@@ -202,7 +202,7 @@ export default function App() {
           width: 4px;
           height: 40px;
           top: -18px;
-          background-color: #ff0000;
+          background-color: #000000;
           z-index: 10;
           border-radius: 2px;
         }
@@ -214,7 +214,7 @@ export default function App() {
       <div id="game-container" className={`max-w-3xl w-full bg-white border-4 rounded-[2.5rem] shadow-2xl overflow-hidden p-8 md:p-12 transition-all duration-300 ${
         gameState === 'result' 
           ? (isSuccess ? 'border-green-500 shadow-green-100' : 'border-red-500 shadow-red-100') 
-          : 'border-red shadow-slate-200'
+          : 'border-black shadow-slate-200'
       }`}>
         
         <AnimatePresence mode="wait">
@@ -237,7 +237,7 @@ export default function App() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2 uppercase flex items-center gap-2">
-                      <Target className="w-4 h-4" /> Chọn bài hát 
+                      <Target className="w-4 h-4" /> Chọn Bộ Đề Có Sẵn
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {PRESETS.map((preset) => (
@@ -330,7 +330,12 @@ export default function App() {
               </div>
 
               <div className="text-center space-y-6">
-                <p className="text-red-600 font-black text-2xl uppercase italic tracking-tighter animate-bounce">Nhấn [PHÍM CÁCH] ngay!</p>
+                <p 
+                  onClick={() => stopGame()}
+                  className="text-red-600 font-black text-2xl uppercase italic tracking-tighter animate-bounce cursor-pointer active:scale-95 transition-transform"
+                >
+                  Nhấn [PHÍM CÁCH] ngay!
+                </p>
                 <button 
                   onClick={resetGame}
                   className="text-slate-400 hover:text-red-600 font-bold text-sm uppercase transition-colors flex items-center gap-2 mx-auto"
@@ -395,7 +400,7 @@ export default function App() {
                   ? `Bắt khoảnh khắc tuyệt vời! Bạn đã chốt hạ từ khóa "${keyword}" cực chuẩn.`
                   : finalTime < targetStart 
                     ? `Quá sớm! Từ khóa "${keyword}" còn ở phía trước.`
-                    : `Trễ rồi! Từ khóa "${keyword}" đã lướt qua.`
+                    : `Trễ rồi! Từ khóa "${keyword}" đã vụt qua.`
                 }
               </p>
 
