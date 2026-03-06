@@ -4,27 +4,64 @@
 @theme {
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-digital: "Orbitron", sans-serif;
+  --font-mono: "Orbitron", monospace;
 }
 
 @layer components {
-  .timeline-container {
-    @apply relative w-full h-[60px] flex items-center;
+  .mono-font {
+    font-family: var(--font-mono);
   }
 
-  .timeline-main-line {
-    @apply absolute w-full h-[6px] bg-slate-200 rounded-full;
+  .timeline-container {
+    @apply flex items-center gap-4 w-full px-4 py-8;
+  }
+
+  .timeline-wrapper {
+    @apply relative flex-1 h-12 flex items-center;
+  }
+
+  .main-track {
+    @apply relative w-full h-[2px] bg-slate-900;
+    /* End ticks */
+    &::before, &::after {
+      content: '';
+      @apply absolute w-[2px] h-4 bg-slate-900 -top-[7px];
+    }
+    &::before { @apply left-0; }
+    &::after { @apply right-0; }
+  }
+
+  .progress-fill {
+    @apply absolute h-full bg-red-500/20 z-0;
+    transition: width 0.1s linear;
   }
 
   .target-zone {
-    @apply absolute h-[16px] bg-red-500 border-2 border-red-600 z-10 rounded-sm transition-opacity duration-300;
+    @apply absolute h-6 -top-3 border-x-2 border-slate-900 z-10 transition-all duration-1000 ease-in-out;
+    background-color: transparent;
   }
 
   .target-label {
-    @apply absolute -bottom-7 left-1/2 -translate-x-1/2 text-[11px] text-red-600 font-black uppercase whitespace-nowrap;
+    @apply absolute -bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1;
   }
 
-  .seeker {
-    @apply absolute w-[6px] h-[34px] bg-slate-800 z-20 rounded-full shadow-md;
+  .wavy-line {
+    @apply w-full h-1;
+    background-image: radial-gradient(circle at 2px 0, transparent 0, transparent 2px, #0f172a 2px, #0f172a 3px, transparent 3px);
+    background-size: 6px 4px;
+    background-repeat: repeat-x;
+  }
+
+  .ans-text {
+    @apply text-xs font-black uppercase tracking-widest text-slate-900 whitespace-nowrap;
+  }
+
+  .seeker-line {
+    @apply absolute w-[2px] h-10 bg-red-600 z-20 -top-5 shadow-[0_0_10px_rgba(220,38,38,0.5)];
+    &::before {
+      content: '';
+      @apply absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full -translate-y-1/2;
+    }
   }
 
   .pulse-red {
