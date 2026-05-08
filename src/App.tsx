@@ -581,7 +581,7 @@ export default function App() {
               className="space-y-8"
             >
               <div className="flex flex-col items-center justify-center mb-4 gap-4">
-                <img src="https://res.cloudinary.com/antony12/image/upload/v1778232586/mskgeqtsbtqz7ueo7i49.png" className="h-10 md:h-14 object-contain" alt="CPS and Bose Logo" />
+                <img src="https://res.cloudinary.com/antony12/image/upload/v1778232586/mskgeqtsbtqz7ueo7i49.png" className="h-48 md:h-14 object-contain" alt="CPS and Bose Logo" />
                 <div className="text-center">
                   <h1 className="text-4xl md:text-5xl font-black text-red-600 tracking-tighter uppercase italic">Perfect Snap</h1>
                   <p className="text-slate-500 mt-2 font-medium">Dừng để chiến thắng!</p>
