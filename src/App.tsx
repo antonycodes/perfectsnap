@@ -13,6 +13,9 @@ interface SongInfo {
   chorusStartTime: number; // Absolute time in song where chorus starts
   audioUrl?: string;
   sourceUrl?: string;
+  public_id?: string;
+  originalTargetStart?: number;
+  originalTargetEnd?: number;
   keyword: string;
   targetStart: number;
   targetEnd: number;
@@ -20,56 +23,300 @@ interface SongInfo {
 
 const PRESETS: SongInfo[] = [
   {
-    id: 'hay-trao-cho-anh',
-    title: 'Hãy trao cho anh',
+    id: 'muon-roi-ma-sao-con',
+    title: 'Muộn Rồi Mà Sao Còn',
     artist: 'Sơn Tùng M-TP',
-    keyword: 'khung trời riêng',
-    audioUrl: 'https://res.cloudinary.com/dxikjdqqn/video/upload/v1772790546/haytraochoanh_c7lypk.mp3',
+    keyword: 'trần nhà',
+    public_id: 'ygs4da7veeiwjjqpao1f',
+    originalTargetStart: 32,
+    originalTargetEnd: 33,
     targetStart: 15.0,
     targetEnd: 16.0,
     chorusStartTime: 0,
-    lyrics: '...khung trời riêng...',
-    keywordTimestamp: 10.0
+    lyrics: '...Muộn rồi mà sao còn nhìn lên trần nhà rồi quay ra...',
+    keywordTimestamp: 15.0
   },
   {
-    id: 'khong-thoi-gian',
-    title: 'Không thời gian',
+    id: 'phep-mau',
+    title: 'Phép Màu',
+    artist: 'Nguyễn Hùng',
+    keyword: 'phép màu',
+    public_id: 'ss9teyeskavw8c7oyyid',
+    originalTargetStart: 72,
+    originalTargetEnd: 73,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Chẳng phải phép màu, tại sao chúng ta gặp nhau...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'tai-sinh',
+    title: 'Tái Sinh',
+    artist: 'Tùng Dương',
+    keyword: 'đắm say',
+    public_id: 'jiqip3rmvibbkj46q255',
+    originalTargetStart: 67,
+    originalTargetEnd: 68,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Người làm anh biết yêu, đắm say như tình đầu...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'chay-ngay-di',
+    title: 'Chạy Ngay Đi',
+    artist: 'Sơn Tùng M-TP',
+    keyword: 'trước khi',
+    public_id: 'peaj39lfmllcpd2xbknf',
+    originalTargetStart: 76,
+    originalTargetEnd: 77,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Chạy ngay đi, trước khi, mọi điều dần tồi tệ hơn...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'con-gi-dep-hon',
+    title: 'Còn Gì Đẹp Hơn',
+    artist: 'Nguyễn Hùng',
+    keyword: 'hoa đăng',
+    public_id: 'npnplp1qkjmorjs2jdr2',
+    originalTargetStart: 83,
+    originalTargetEnd: 84,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Trong đêm hoa đăng sau ngày vui chiến thắng...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'binh-yen',
+    title: 'Bình Yên',
+    artist: 'Vũ ft Binz',
+    keyword: 'tìm thấy',
+    public_id: 'qol6ljh260dotoodbswx',
+    originalTargetStart: 78,
+    originalTargetEnd: 79,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Vì anh đã tìm thấy bình yên...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'thiep-hong-sai-ten',
+    title: 'Thiệp Hồng Sai Tên',
+    artist: 'Nguyễn Thành Đạt',
+    keyword: 'tình duyên',
+    public_id: 'ejwhcw3iebmwntg0lylw',
+    originalTargetStart: 98,
+    originalTargetEnd: 99,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Ai gieo tình duyên ta nửa vời...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'bau-troi-moi',
+    title: 'Bầu Trời Mới',
+    artist: 'Da LAB',
+    keyword: 'bầu trời',
+    public_id: 'gjuvrbd3e3ao8eegprj6',
+    originalTargetStart: 118,
+    originalTargetEnd: 119,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Em giờ đã có bầu trời mới...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'thang-4-la-loi-noi-doi-cua-em',
+    title: 'Tháng 4 Là Lời Nói Dối Của Em',
+    artist: 'Hà Anh Tuấn',
+    keyword: 'đi xa',
+    public_id: 'bjkveztxgszadynzfdyd',
+    originalTargetStart: 93,
+    originalTargetEnd: 94,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...đi xa mãi...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'exit-sign',
+    title: 'Exit Sign',
+    artist: 'HIEUTHUHAI',
+    keyword: 'chúng ta',
+    public_id: 'yxzh4frhstbabzgqdgco',
+    originalTargetStart: 78,
+    originalTargetEnd: 79,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Em hiểu rằng chúng ta không ai là sai...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'gia-nhu',
+    title: 'Giá Như',
+    artist: 'Soobin Hoàng Sơn',
+    keyword: 'sắt đá',
+    public_id: 'oji4dbyaqwltxojg0jbi',
+    originalTargetStart: 57,
+    originalTargetEnd: 58,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Chẳng lẽ trái tim em sắt đá như vậy...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'vi-anh-dau-co-biet',
+    title: 'Vì Anh Đâu Có Biết',
+    artist: 'Madihu ft. Vũ.',
+    keyword: 'đâu có biết',
+    public_id: 'jo045vexhculbb3bfdch',
+    originalTargetStart: 27,
+    originalTargetEnd: 28,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Vì anh đâu có biết, giấu đi thời gian...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'mot-vong-viet-nam',
+    title: 'Một Vòng Việt Nam',
+    artist: 'Tùng Dương',
+    keyword: 'lúa chín',
+    public_id: 'qnqbsnon7byir3mwrkxb',
+    originalTargetStart: 80,
+    originalTargetEnd: 81,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Việt Nam ơi, quê hương ta ơi, biển lúa chín vàng thơm ngát trời...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'hay-trao-cho-anh',
+    title: 'Hãy Trao Cho Anh',
+    artist: 'Sơn Tùng M-TP',
+    keyword: 'mong chờ',
+    public_id: 'jy0jy7pyefwb39m9gttd',
+    originalTargetStart: 64,
+    originalTargetEnd: 65,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Hãy trao cho anh, thứ anh đang mong chờ...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'waiting-for-you',
+    title: 'Waiting For You',
+    artist: 'Mono',
+    keyword: 'gần bên',
+    public_id: 'qiufvohqlgpaysas7hog',
+    originalTargetStart: 51,
+    originalTargetEnd: 52,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Biết em đã có người... ở gần bên...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'neu-luc-do',
+    title: 'Nếu Lúc Đó',
+    artist: 'Tlinh',
+    keyword: 'trốn chạy',
+    public_id: 'ssxpmomcnodjjafhh8mb',
+    originalTargetStart: 35,
+    originalTargetEnd: 36,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Nếu lúc đó ta không trốn chạy...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'mat-ket-noi',
+    title: 'Mất Kết Nối',
     artist: 'Dương Domic',
-    keyword: 'Bình yên',
-    audioUrl: 'https://res.cloudinary.com/dxikjdqqn/video/upload/v1772790546/khongthoigian_mnq4bz.mp3',
-    targetStart: 14.0,
-    targetEnd: 15.0,
+    keyword: 'bây giờ',
+    public_id: 'did9sb7r5ceor4zv82wf',
+    originalTargetStart: 96,
+    originalTargetEnd: 97,
+    targetStart: 15.0,
+    targetEnd: 16.0,
     chorusStartTime: 0,
-    lyrics: '...Bình yên...',
-    keywordTimestamp: 10.0
+    lyrics: '...Dòng ký ức trong em về anh bây giờ đang phai dần...',
+    keywordTimestamp: 15.0
   },
   {
-    id: 'viet-nam-oi',
-    title: 'Việt Nam ơi',
-    artist: 'Minh Beta',
-    keyword: 'tiếng trẻ thơ',
-    audioUrl: 'https://res.cloudinary.com/dxikjdqqn/video/upload/v1772790546/vietnamoi_hcw8fv.mp3',
-    targetStart: 20.0,
-    targetEnd: 22.0,
+    id: 'kho-bau',
+    title: 'Kho Báu',
+    artist: '(S)Trong Trọng Hiếu',
+    keyword: 'cuộc tình',
+    public_id: 'brlesnlgzjv2n2wvalde',
+    originalTargetStart: 49,
+    originalTargetEnd: 50,
+    targetStart: 15.0,
+    targetEnd: 16.0,
     chorusStartTime: 0,
-    lyrics: '...tiếng trẻ thơ...',
-    keywordTimestamp: 10.0
+    lyrics: '...Ghi tên một cuộc tình từng rất đậm sâu...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'di-giua-troi-ruc-ro',
+    title: 'Đi Giữa Trời Rực Rỡ',
+    artist: 'Ngô Lan Hương',
+    keyword: 'bước đi',
+    public_id: 'sj0k5ybbyppwqhiq9iq7',
+    originalTargetStart: 78,
+    originalTargetEnd: 79,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Thênh thang bước đi giữa trời rực rỡ...',
+    keywordTimestamp: 15.0
+  },
+  {
+    id: 'nguoi-dau-tien',
+    title: 'Người Đầu Tiên',
+    artist: 'Juky San',
+    keyword: 'chia đôi',
+    public_id: 'f4zd1te2qcfu27wwwqug',
+    originalTargetStart: 38,
+    originalTargetEnd: 39,
+    targetStart: 15.0,
+    targetEnd: 16.0,
+    chorusStartTime: 0,
+    lyrics: '...Nơi mà ta không chia đôi quãng đời...',
+    keywordTimestamp: 15.0
   }
 ];
 
-const SESSION_TIME_LIMIT = 180; // 3 minutes
-const SONGS_PER_SESSION = 3;
+const SESSION_TIME_LIMIT = 180; // 10 minutes
+const SONGS_PER_SESSION = 5;
 
 export default function App() {
   const [gameState, setGameState] = useState<GameState>('setup');
-  
+
   // Session State
   const [sessionSongs, setSessionSongs] = useState<SongInfo[]>([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [sessionTimeLeft, setSessionTimeLeft] = useState(SESSION_TIME_LIMIT);
   const [sessionScore, setSessionScore] = useState(0);
-  const [sessionResults, setSessionResults] = useState<{song: SongInfo, success: boolean, time: number}[]>([]);
-  
+  const [sessionResults, setSessionResults] = useState<{ song: SongInfo, success: boolean, time: number }[]>([]);
+
   // Current Song State
   const [songInfo, setSongInfo] = useState<SongInfo | null>(null);
   const [viewDuration] = useState<number>(30); // Fixed 30s chorus
@@ -96,40 +343,55 @@ export default function App() {
     return newArray;
   };
 
+  const startSessionTimer = useCallback(() => {
+    if (sessionTimerRef.current) clearInterval(sessionTimerRef.current);
+    sessionTimerRef.current = setInterval(() => {
+      setSessionTimeLeft(prev => Math.max(0, prev - 1));
+    }, 1000);
+  }, []);
+
+  const stopSessionTimer = useCallback(() => {
+    if (sessionTimerRef.current) {
+      clearInterval(sessionTimerRef.current);
+      sessionTimerRef.current = null;
+    }
+  }, []);
+
   const startSession = () => {
     // Ensure we have enough presets, otherwise just use what we have
-    const shuffled = shuffleArray(PRESETS).slice(0, SONGS_PER_SESSION);
+    const shuffled = shuffleArray(PRESETS).slice(0, SONGS_PER_SESSION).map(song => {
+      const R = Math.floor(Math.random() * (24 - 12 + 1)) + 12;
+      const duration = song.originalTargetEnd - song.originalTargetStart;
+      const so = Math.max(0, song.originalTargetStart - R);
+      const actualTargetStart = song.originalTargetStart - so;
+      return {
+        ...song,
+        targetStart: actualTargetStart,
+        targetEnd: actualTargetStart + duration,
+        keywordTimestamp: actualTargetStart,
+        audioUrl: `https://res.cloudinary.com/antony12/video/upload/so_${so},du_30.0/e_fade:2000/e_fade:-2000/${song.public_id}.mp3`
+      };
+    });
     if (shuffled.length === 0) {
       showToast("Không có bài hát nào để chơi!");
       return;
     }
-    
+
     setSessionSongs(shuffled);
     setCurrentSongIndex(0);
     setSessionTimeLeft(SESSION_TIME_LIMIT);
     setSessionScore(0);
     setSessionResults([]);
-    
+
     loadSong(shuffled[0]);
     setGameState('playing');
-    
-    // Start global timer
-    if (sessionTimerRef.current) clearInterval(sessionTimerRef.current);
-    sessionTimerRef.current = setInterval(() => {
-      setSessionTimeLeft(prev => {
-        if (prev <= 1) {
-          endSession();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+    startSessionTimer();
   };
 
   const loadSong = (song: SongInfo) => {
     setSongInfo(song);
     setRelativeTime(0);
-    
+
     if (audioRef.current) {
       audioRef.current.src = song.audioUrl || '';
       audioRef.current.currentTime = song.chorusStartTime;
@@ -171,15 +433,22 @@ export default function App() {
     }
   };
 
-  const endSession = () => {
-    if (sessionTimerRef.current) clearInterval(sessionTimerRef.current);
+  const endSession = useCallback(() => {
+    stopSessionTimer();
+    if (gameState === 'playing' && songInfo) {
+      setSessionResults(prev => [...prev, {
+        song: songInfo,
+        success: false,
+        time: relativeTime,
+      }]);
+    }
     if (audioRef.current) {
       audioRef.current.pause();
       setIsPlaying(false);
     }
     if (requestRef.current) cancelAnimationFrame(requestRef.current);
     setGameState('final_result');
-  };
+  }, [gameState, songInfo, relativeTime, stopSessionTimer]);
 
   const onAudioError = () => {
     if (songInfo?.audioUrl) {
@@ -189,7 +458,7 @@ export default function App() {
 
   const stopGame = useCallback(() => {
     if (!songInfo || gameState !== 'playing') return;
-    
+
     if (audioRef.current) {
       const absoluteStop = audioRef.current.currentTime;
       const relativeStop = absoluteStop - songInfo.chorusStartTime;
@@ -197,12 +466,12 @@ export default function App() {
       setIsPlaying(false);
       setFinalTime(relativeStop);
       setRelativeTime(relativeStop);
-      
+
       const isSuccess = relativeStop >= songInfo.targetStart && relativeStop <= songInfo.targetEnd;
       if (isSuccess) {
         setSessionScore(prev => prev + 1);
       }
-      
+
       setSessionResults(prev => [...prev, {
         song: songInfo,
         success: isSuccess,
@@ -216,7 +485,7 @@ export default function App() {
     if (audioRef.current && gameState === 'playing' && songInfo) {
       const rel = audioRef.current.currentTime - songInfo.chorusStartTime;
       setRelativeTime(rel);
-      
+
       if (audioRef.current.ended || rel >= viewDuration) {
         // Auto stop if it reaches the end of the view duration
         stopGame();
@@ -235,9 +504,16 @@ export default function App() {
     };
   }, [gameState, updateUI]);
 
-  const resetGame = () => {
+  useEffect(() => {
+    if (sessionTimeLeft <= 0 && (gameState === 'playing' || gameState === 'result')) {
+      endSession();
+    }
+  }, [sessionTimeLeft, gameState, endSession]);
+
+  const resetGame = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setGameState('setup');
-    if (sessionTimerRef.current) clearInterval(sessionTimerRef.current);
+    stopSessionTimer();
     if (requestRef.current) cancelAnimationFrame(requestRef.current);
     if (audioRef.current) {
       audioRef.current.pause();
@@ -268,18 +544,17 @@ export default function App() {
 
   const isSuccess = songInfo ? (finalTime >= songInfo.targetStart && finalTime <= songInfo.targetEnd) : false;
   const displayMax = viewDuration;
-  const progressPercent = Math.min((relativeTime / displayMax) * 100, 100);
+  const progressPercent = Math.max(0, Math.min((relativeTime / displayMax) * 100, 100));
   const targetStartPct = songInfo ? (songInfo.targetStart / displayMax) * 100 : 0;
   const targetEndPct = songInfo ? (songInfo.targetEnd / displayMax) * 100 : 0;
   const targetWidthPct = targetEndPct - targetStartPct;
 
   return (
-    <div 
-      className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-500 ${
-        gameState === 'result' ? (isSuccess ? 'bg-green-50' : 'bg-red-50') : 'bg-slate-50'
-      }`}
-      onClick={() => {
-        if (gameState === 'playing') stopGame();
+    <div
+      className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-500 touch-manipulation select-none ${gameState === 'result' ? (isSuccess ? 'bg-green-50' : 'bg-red-50') : 'bg-slate-50'
+        }`}
+      onPointerDown={(e) => {
+        if (e.pointerType !== 'mouse' && gameState === 'playing') stopGame();
       }}
     >
       {/* Global Timer Header */}
@@ -292,26 +567,27 @@ export default function App() {
         </div>
       )}
 
-      <div id="game-container" className={`max-w-3xl w-full bg-white border-4 rounded-[2.5rem] shadow-2xl overflow-hidden p-8 md:p-12 transition-all duration-300 ${
-        isSuccess && gameState === 'result' ? 'border-green-500 shadow-green-100' : 'border-slate-200'
-      }`}
-      onClick={(e) => e.stopPropagation()} // Prevent clicks inside container from triggering snap
+      <div id="game-container" className={`max-w-3xl w-full bg-white border-4 rounded-[2.5rem] shadow-2xl overflow-hidden p-8 md:p-12 transition-all duration-300 ${isSuccess && gameState === 'result' ? 'border-green-500 shadow-green-100' : 'border-slate-200'
+        }`}
       >
-        
+
         <AnimatePresence mode="wait">
           {gameState === 'setup' && (
-            <motion.div 
+            <motion.div
               key="setup"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className="space-y-8"
             >
-              <div className="text-center">
-                <h1 className="text-5xl font-black text-red-600 tracking-tighter uppercase  italic">Perfect Snap</h1>
-                <p className="text-slate-500 mt-2 font-medium">Dừng để chiến thắng!</p>
+              <div className="flex flex-col items-center justify-center mb-4 gap-4">
+                <img src="https://res.cloudinary.com/antony12/image/upload/v1778232586/mskgeqtsbtqz7ueo7i49.png" className="h-10 md:h-14 object-contain" alt="CPS and Bose Logo" />
+                <div className="text-center">
+                  <h1 className="text-4xl md:text-5xl font-black text-red-600 tracking-tighter uppercase italic">Perfect Snap</h1>
+                  <p className="text-slate-500 mt-2 font-medium">Dừng để chiến thắng!</p>
+                </div>
               </div>
-              
+
               <div className="space-y-5 bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100 text-center">
                 <h2 className="font-black text-xl uppercase text-slate-800">Luật chơi</h2>
                 <ul className="text-slate-600 text-sm space-y-2 text-left max-w-md mx-auto list-disc pl-5">
@@ -322,7 +598,7 @@ export default function App() {
                 </ul>
               </div>
 
-              <button 
+              <button
                 onClick={startSession}
                 className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-5 rounded-2xl transition-all transform hover:scale-[1.02] active:scale-95 shadow-xl shadow-red-200 text-xl uppercase tracking-widest flex items-center justify-center gap-3"
               >
@@ -333,14 +609,14 @@ export default function App() {
           )}
 
           {gameState === 'playing' && songInfo && (
-            <motion.div 
+            <motion.div
               key="playing"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
               className="space-y-12 flex flex-col items-center"
             >
-              <div className="flex justify-between w-full items-center">
+              <div className="flex justify-between w-full items-center" onPointerDown={(e) => e.stopPropagation()}>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-black text-sm">
                     {currentSongIndex + 1}/{sessionSongs.length}
@@ -365,17 +641,17 @@ export default function App() {
                 <div className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mt-2">Seconds</div>
               </div>
 
-              <div className="w-full space-y-2">
+              <div className="w-full space-y-2" onPointerDown={(e) => e.stopPropagation()}>
                 <div className="timeline-container">
                   <div className="flex items-center gap-1">
-                    <button 
-                      onClick={togglePlayPause} 
+                    <button
+                      onClick={togglePlayPause}
                       className="text-slate-400 hover:text-red-600 transition-colors p-2 rounded-full hover:bg-red-50"
                     >
                       {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
                     </button>
-                    <button 
-                      onClick={replayCurrentSong} 
+                    <button
+                      onClick={replayCurrentSong}
                       className="text-slate-400 hover:text-red-600 transition-colors p-2 rounded-full hover:bg-red-50"
                     >
                       <RotateCcw className="w-6 h-6" />
@@ -388,17 +664,21 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-between px-16 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                  <span>0:00</span>
-                  <span>0:15</span>
-                  <span>0:30</span>
+                <div className="flex w-full px-4 gap-4">
+                  <div className="w-[84px] flex-shrink-0"></div>
+                  <div className="flex-1 flex justify-between text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                    <span>0:00</span>
+                    <span>0:15</span>
+                    <span>0:30</span>
+                  </div>
                 </div>
               </div>
 
               <div className="text-center space-y-6">
                 <p className="text-red-600 pulse-red font-black text-2xl uppercase italic tracking-tighter">Nhấn [PHÍM CÁCH] hoặc chạm màn hình!</p>
-                <button 
+                <button
                   onClick={resetGame}
+                  onPointerDown={(e) => e.stopPropagation()}
                   className="text-slate-400 hover:text-red-600 font-bold text-sm uppercase transition-colors flex items-center gap-2 mx-auto"
                 >
                   <XCircle className="w-4 h-4" />
@@ -409,7 +689,7 @@ export default function App() {
           )}
 
           {gameState === 'result' && songInfo && (
-            <motion.div 
+            <motion.div
               key="result"
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -421,7 +701,7 @@ export default function App() {
               <h2 className={`text-5xl font-black tracking-tighter uppercase italic ${isSuccess ? 'text-green-600' : 'text-red-600'}`}>
                 {isSuccess ? 'Chiến Thắng!' : 'Hụt Mất Rồi!'}
               </h2>
-              
+
               <div className="bg-white p-6 rounded-[2rem] space-y-4 border-2 border-slate-100 shadow-lg">
                 <div className="flex justify-between items-center border-b-2 border-slate-50 pb-3">
                   <span className="text-slate-400 font-bold uppercase text-xs">Bạn đã dừng lúc:</span>
@@ -431,7 +711,7 @@ export default function App() {
                   <span className="text-slate-400 font-bold uppercase text-xs">Từ khóa "{songInfo.keyword}" lúc:</span>
                   <span className="font-black text-lg text-red-600">{songInfo.targetStart.toFixed(2)}s - {songInfo.targetEnd.toFixed(2)}s</span>
                 </div>
-                
+
                 <div className="w-full space-y-2 mt-4">
                   <div className="timeline-container">
                     <div className="text-slate-300 p-2">
@@ -441,13 +721,13 @@ export default function App() {
                       <div className="main-track">
                         {/* Background progress */}
                         <div className="progress-fill opacity-10" style={{ width: `${(finalTime / displayMax) * 100}%` }}></div>
-                        
+
                         {/* Animated Target Zone Reveal */}
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0, scaleY: 0 }}
                           animate={{ opacity: 1, scaleY: 1 }}
                           transition={{ delay: 0, duration: 0.1 }}
-                          className="target-zone" 
+                          className="target-zone"
                           style={{ left: `${targetStartPct}%`, width: `${targetWidthPct}%` }}
                         >
                           <div className="target-label">
@@ -458,13 +738,12 @@ export default function App() {
 
                         {/* Seeker with Result Indicator */}
                         <div className="seeker-line" style={{ left: `${(finalTime / displayMax) * 100}%` }}>
-                          <motion.div 
+                          <motion.div
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ delay: 0, type: "spring" }}
-                            className={`absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1 rounded-lg font-black text-[10px] uppercase tracking-widest shadow-lg ${
-                              isSuccess ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-                            }`}
+                            className={`absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1 rounded-lg font-black text-[10px] uppercase tracking-widest shadow-lg ${isSuccess ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                              }`}
                           >
                             {isSuccess ? 'Perfect' : 'Missed'}
                           </motion.div>
@@ -472,15 +751,18 @@ export default function App() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-between px-16 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                    <span>0:00</span>
-                    <span>0:15</span>
-                    <span>0:30</span>
+                  <div className="flex w-full px-4 gap-4">
+                    <div className="w-[40px] flex-shrink-0"></div>
+                    <div className="flex-1 flex justify-between text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                      <span>0:00</span>
+                      <span>0:15</span>
+                      <span>0:30</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <button 
+              <button
                 onClick={nextSong}
                 className="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-5 rounded-2xl transition-all shadow-xl text-xl uppercase flex items-center justify-center gap-3"
               >
@@ -494,7 +776,7 @@ export default function App() {
           )}
 
           {gameState === 'final_result' && (
-            <motion.div 
+            <motion.div
               key="final_result"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -504,7 +786,7 @@ export default function App() {
                 <Trophy className="w-24 h-24 mx-auto text-yellow-500 mb-4" />
                 <h1 className="text-5xl font-black text-slate-900 tracking-tighter uppercase italic">Tổng Kết</h1>
               </div>
-              
+
               <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100 space-y-6">
                 <div className="flex justify-between items-center border-b-2 border-slate-200 pb-4">
                   <span className="text-slate-500 font-bold uppercase">Điểm số:</span>
@@ -514,7 +796,7 @@ export default function App() {
                   <span className="text-slate-500 font-bold uppercase">Thời gian còn lại:</span>
                   <span className="font-black text-2xl text-slate-900">{formatTime(sessionTimeLeft)}</span>
                 </div>
-                
+
                 <div className="space-y-3 mt-6">
                   <h3 className="text-sm font-bold text-slate-400 uppercase text-left">Chi tiết:</h3>
                   {sessionResults.map((res, idx) => (
@@ -531,7 +813,7 @@ export default function App() {
                 </div>
               </div>
 
-              <button 
+              <button
                 onClick={resetGame}
                 className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-red-200 text-xl uppercase tracking-widest flex items-center justify-center gap-3"
               >
@@ -546,7 +828,7 @@ export default function App() {
 
       <AnimatePresence>
         {toast && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -50, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: -50, x: '-50%' }}
@@ -558,10 +840,10 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <audio 
-        ref={audioRef} 
+      <audio
+        ref={audioRef}
         onError={onAudioError}
-        className="hidden" 
+        className="hidden"
       />
     </div>
   );
